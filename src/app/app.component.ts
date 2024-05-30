@@ -10,8 +10,6 @@ import {Router, RouterLink, RouterOutlet} from '@angular/router';
     <main>
       <header class="brand-name">
         <a [routerLink]="['/home']" style="text-decoration: none; color: inherit;">
-
-<!--          <button type="submit" class="primary">Notes</button>-->
           <button (click)="btnClick()">Notes</button>
         </a>
       </header>
