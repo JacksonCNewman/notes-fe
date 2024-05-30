@@ -20,6 +20,15 @@ export class AuthService {
       );
   }
 
+  refreshToken() {
+
+    console.log(localStorage.getItem('refreshToken'));
+    return this.http.post<JwtResponse>(this.serviceBaseUrl + '/refresh', localStorage.getItem('refreshToken'))
+      .pipe(
+        tap(response => this.setSession(response))
+      );
+  }
+
   private setSession(authResult: JwtResponse) {
     localStorage.setItem('jwt', authResult.jwt);
     localStorage.setItem('refreshToken', authResult.refreshToken);

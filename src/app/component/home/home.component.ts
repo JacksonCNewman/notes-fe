@@ -3,6 +3,7 @@ import {Note} from "../../model/Note";
 import {NotesService} from "../../service/notes.service";
 import {NoteComponent} from "../note/note.component";
 import {NgFor} from "@angular/common";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ import {NgFor} from "@angular/common";
       ></app-note>
     </section>
   `,
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  providers: [AuthService]
 })
 export class HomeComponent {
   notes: Note[] = [];
