@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {tap} from "rxjs/operators";
 import {JwtResponse} from "../model/JwtResponse";
+import {NoteUser} from "../model/NoteUser";
 
 
 
@@ -18,6 +19,16 @@ export class AuthService {
       .pipe(
         tap(response => this.setSession(response))
       );
+  }
+
+  signUp(username:string, password:string, email:string) {
+    const noteUser: NoteUser = <NoteUser>{
+      username: username,
+      password: password,
+      email: email
+    }
+
+    return this.http.post<JwtResponse>(this.serviceBaseUrl+'/create-user', noteUser);
   }
 
   refreshToken() {

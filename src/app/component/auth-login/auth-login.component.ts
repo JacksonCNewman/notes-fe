@@ -17,7 +17,7 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
         <h1>Login</h1>
       </div>
       <form class="form-group" [formGroup]="loginForm" (ngSubmit)="login()">
-        <input name="username" type="username" formControlName="username" placeholder="Username">
+        <input name="username" formControlName="username" placeholder="Username">
         <input type="password" formControlName="password" placeholder="Password">
         <button>Submit</button>
       </form>
