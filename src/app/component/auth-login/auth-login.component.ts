@@ -53,8 +53,4 @@ export class AuthLoginComponent {
         );
     }
   }
-
-  openRegistrationPage(){
-    // this.router.navigateByUrl("/signup");
-  }
 }
