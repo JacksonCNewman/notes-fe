@@ -1,53 +1,47 @@
 import {Component} from "@angular/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../../service/auth.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
   selector: 'login',
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    RouterLink,
+    RouterLinkActive,
   ],
   template: `
-    <form [formGroup]="form">
-      <fieldset>
-        <legend>Login</legend>
-        <div class="form-field">
-          <label>Username:</label>
-          <input name="username" formControlName="username">
-        </div>
-        <div class="form-field">
-          <label>Password:</label>
-          <input name="password" formControlName="password"
-                 type="password">
-        </div>
-      </fieldset>
-      <div class="form-buttons">
-        <button class="button button-primary"
-                (click)="login()">Login
-        </button>
+    <div class="login-card">
+      <div class="card-title">
+        <h1>Login</h1>
       </div>
-    </form>
+      <form class="form-group" [formGroup]="loginForm" (ngSubmit)="login()">
+        <input name="username" type="username" formControlName="username" placeholder="Username">
+        <input type="password" formControlName="password" placeholder="Password">
+        <button>Submit</button>
+      </form>
+      <a class="card-text" routerLink="/signup" routerLinkActive = “active”>Sign up</a>
+    </div>
   `,
   styleUrl: './auth-login.component.css',
   providers: [AuthService]
 })
 export class AuthLoginComponent {
-  form:FormGroup;
+  loginForm:FormGroup;
 
   constructor(private fb:FormBuilder,
               private authService: AuthService,
               private router: Router) {
 
-    this.form = this.fb.group({
+    this.loginForm = this.fb.group({
       username: ['',Validators.required],
       password: ['',Validators.required]
     });
   }
 
   login() {
-    const val = this.form.value;
+    const val = this.loginForm.value;
 
     if (val.username && val.password) {
       this.authService.login(val.username, val.password)
@@ -58,5 +52,9 @@ export class AuthLoginComponent {
           }
         );
     }
+  }
+
+  openRegistrationPage(){
+    // this.router.navigateByUrl("/signup");
   }
 }
